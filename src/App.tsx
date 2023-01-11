@@ -1,7 +1,19 @@
 import React from 'react';
+import styled from 'styled-components';
+
+import MainPage from './pages/main';
 
 function App() {
-  return <div>app</div>;
+  return (
+    <Wrapper>
+      <MainPage />
+    </Wrapper>
+  );
 }
+
+const Wrapper = styled.div`
+  background-color: #cae9ff;
+  height: 100vh;
+`;
 
 export default App;
