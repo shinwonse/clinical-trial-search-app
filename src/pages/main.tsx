@@ -1,37 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { fetchResult } from '../api/search';
 import SearchBar from '../components/SearchBar';
 import SearchResultBox from '../components/SearchResultBox';
+import { useFetch } from '../hooks/useFetch';
 
 function MainPage() {
   const [isSearching, setIsSearching] = useState(false);
-  const [searchResult, setSearchResult] = useState([]);
   const [input, setInput] = useState('');
   const [keyword, setKeyword] = useState('');
 
-  const url = keyword && `https://www.google.com/search?q=${keyword}`;
-  console.log(url);
+  const url = keyword && `/sick?q=${keyword}`;
+  const { data: searchResult } = useFetch(url);
 
   const handleInputClick = () => {
     setIsSearching(true);
   };
 
-  const getSearchResult = async (keyword: string) => {
-    const { data } = await fetchResult(keyword);
-    setSearchResult(data);
-  };
-
-  useEffect(() => {
-    if (!keyword) {
-      return setSearchResult([]);
-    }
-    getSearchResult(keyword);
-  }, [keyword]);
-
-  const handleChangeKeyword = (value: any) => setKeyword(value.trim());
-  const handleChangeInput = (value: any) => setInput(value);
+  const handleChangeKeyword = (keyword: string) => setKeyword(keyword);
+  const handleChangeInput = (value: string) => setInput(value);
 
   return (
     <Wrapper>
