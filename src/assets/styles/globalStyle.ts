@@ -24,6 +24,10 @@ const GlobalStyle = createGlobalStyle` {
     color: inherit;
     text-decoration: none;
   }
+  input{
+    all: unset
+  }
+}
 `;
 
 export default GlobalStyle;
